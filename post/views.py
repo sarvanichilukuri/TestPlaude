@@ -1,5 +1,6 @@
 import random
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 import requests
 from .models import *
@@ -21,16 +22,19 @@ def extract_and_save_data(request):
         data = post_data
         post_obj = Posts.objects.create(userId = data["userId"], title = data["title"], body = data["body"])
         post_obj.save()
-        template = loader.get_template('success.html')
-        posts = Posts.objects.all()
-        context = {
-            'posts':posts
-        }
-        return HttpResponse(template.render(context,request))
+        return HttpResponseRedirect(reverse('success'))
     
 def index(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render())
+
+def success(request):
+    template = loader.get_template('success.html')
+    posts = Posts.objects.all()
+    context = {
+        'posts':posts
+    }
+    return HttpResponse(template.render(context,request))
 
 
 

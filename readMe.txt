@@ -1,10 +1,13 @@
 To set up the environment:
 
 Create a virtual environment: 
-python -m venev testPlaude
+python -m venv testPlaude
 
 Activate the virtual environment:
-testPlaude\Scripts\activate
+on Windows:
+    testPlaude\Scripts\activate
+on Mac:
+    source myenv/bin/activate
 
 Now inside the virtual environment do the following:
 
